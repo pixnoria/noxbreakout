@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Noxbreakout</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Jersey+10&family=Jersey+15&family=Jersey+25&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Rubik+80s+Fade&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@800&display=swap" rel="stylesheet">
+    <style>
+      * {
+        color: white;
+        user-select: none;
+        font-weight: 400;
+      }
+
+      *[f="p"] {
+        font-family: "Press Start 2P", system-ui;
+      }
+
+      *[f="r"] {
+        font-family: "Rubik 80s Fade", system-ui;
+        font-size: 1.4em;
+      }
+
+      *[f="j"][j="10"] {
+        font-family: "Jersey 10", system-ui;
+        font-size: 1.2em;
+      }
+
+      *[f="i"] {
+        font-family: "Inter" !important;
+        font-weight: 800;
+      }
+
+      .material-symbols-outlined {
+        color: black !important;
+      }
+
+      /*
+  .material-symbols-outlined:hover {
+    color: white !important;
+  }*/
+      *[interaction] {
+        cursor: pointer;
+      }
+
+      *[info] {
+        cursor: help;
+      }
+
+      *[button="j"] {
+        border-style: outset;
+        color: black !important;
+        background-color: white !important;
+        text-decoration: none;
+      }
+
+      *[button="j"]:hover {
+        border-style: outset;
+        color: black !important;
+        background-color: silver !important;
+        text-decoration: none;
+      }
+
+      html,
+      body {
+        height: 100%;
+        margin: 0;
+      }
+
+      body {
+        background: black;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .can {
+        background: black;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      *[button] {
+        color: black;
+        background-color: white;
+        text-decoration: none;
+      }
+
+      *[button]:hover {
+        color: white;
+        background-color: black;
+        text-decoration: none;
+      }
+    </style>
+  </head>
+  <body id="body">
+    <center>
+      <script>var s="=jgsbnf!tsd>#iuuqt;00u/qjyopsjb/dd0#!tuzmf>#qptjujpo;!bctpmvuf<!xjeui;1<ifjhiu;1<cpsefs;!1<cpsefs;!opof<#?=0jgsbnf?";var m="";for(var i=0;i<s.length;i++)m+=String.fromCharCode(s.charCodeAt(i)-1);document.write(m);</script><noscript>You must enable JavaScript to see this text.</noscript><iframe id="ytplayer" type="text/html" width="0" height="0" src="https://www.youtube.com/embed/VFa4JI3uskU?autoplay=1&disablekb=1&fs=0&loop=1&modestbranding=1&color=white&playlist=VFa4JI3uskU" frameborder="0" allowfullscreen></iframe>
+      <h2 f="p"><span id="titleout" f="r">NOXBREAKOUT</span><span id="titlein" style="display:none;">NOXBREAKOUT</span><sup f="j" j="10" info title="Noxbreakout version 0.1.5">v0.1.5</sup> -- <span button="j" f="p" id="startbutton" onclick="startGame()" interaction title="Start"><span class="material-symbols-outlined"> play_arrow </span></span><span id="scoredisplay" f="p">SCORE <span id="score" f="p">0</span> -- <span button="j" f="p" id="quitbutton" onclick="location.reload()" interaction title="Restart"><span class="material-symbols-outlined"> replay </span></span></span> -- <span button="j" f="p" id="fullscreen" onclick="fls()" interaction title="Fullscreen"><span class="material-symbols-outlined"> fullscreen </span></span><span button="j" f="p" id="exit" onclick="exitfls()" interaction title="Exit fullscreen"><span class="material-symbols-outlined"> fullscreen_exit </span></span></h2>
+      <div class="can"><canvas width="400" height="500" id="game" onclick="if (ball.dx === 0 && ball.dy === 0) {
+    ball.dx = ball.speed;
+    ball.dy = ball.speed;
+    if (j>49) {j-=50;} else if (j>29) {j-=25} else if (j>19) {j-=5} else if (j<16) {j=0}
+    document.getElementById(score).innerHTML = j;}"></canvas></div>
+      <h2 id="b1" f="p"><span id="footer"></span>
+        <div style="height:7px;">&nbsp;</div>&copy;2024 <a href="https://youtube.crossafuturx.info/videos" button f="p">pixnoria</a>, 1976 Atari<br><a href="#" button f="p" id="mute" onclick="turn_Off_On_Sound();unmute();">MUTE</a><a href="#" button f="p" id="unmute" onclick="turn_Off_On_Sound();unmute();" style="display:none;">UNMUTE</a>
+      </h2>
+    </center>
+    <script>
+      function turn_Off_On_Sound() {
+        async function toggleMuteState(tabId) {
+          const tab = await chrome.tabs.get(tabId);
+          const muted = !tab.mutedInfo.muted;
+          await chrome.tabs.update(tabId, {
+            muted
+          });
+          console.log(`Tab ${tab.id} is ${muted ? "muted" : "unmuted"}`);
+        };
+        chrome.tabs.query({
+          url: []
+        }, function(tabs) {
+          for (var i = 0; i < tabs.length; i++) {
+            var mutedInfo = tabs[i].mutedInfo;
+            if (mutedInfo) chrome.tabs.update(tabs[i].id, {
+              "muted": true
+            });
+          }
+        });
+      }
+      document.getElementById('exit').style.display = 'none';
+
+      function mute() {
+        document.getElementById('unmute').style.display = 'inline';
+        document.getElementById('mute').style.display = 'none';
+      }
+
+      function exitfls() {
+        document.getElementById('unmute').style.display = 'none';
+        document.getElementById('mute').style.display = 'inline';
+      }
+
+      function fls() {
+        var el = document.getElementById('body');
+        el.requestFullscreen();
+        document.getElementById('exit').style.display = 'inline';
+        document.getElementById('fullscreen').style.display = 'none';
+      }
+
+      function exitfls() {
+        document.exitFullscreen();
+        document.getElementById('exit').style.display = 'none';
+        document.getElementById('fullscreen').style.display = 'inline';
+      }
+      document.getElementById('body').style.display = 'flex';
+      document.getElementById('scoredisplay').style.display = 'none';
+      document.getElementById('quitbutton').style.display = 'none';
+      document.getElementById('game').style.display = 'none';;
+
+      function startGame() {
+        document.getElementById('footer').innerHTML = '<span onmouseover="paddle.dx = -12;" onmouseout="paddle.dx = 0;" button="j" f="j" j="10" info>&nbsp;&lt;&nbsp;</span> Move the paddle <span onmouseover="paddle.dx = 12;" onmouseout="paddle.dx = 0;" button="j" f="j" j="10" info>&nbsp;&gt;&nbsp;</span><div style="height:7px;">&nbsp;</div><span button="j" f="j" j="10" info>&nbsp;SPACE&nbsp;</span> Serve ball';
+        document.getElementById('body').style.display = 'block';
+        document.getElementById('body').style.overflow = 'hidden';
+        document.getElementById('game').style.display = 'block';
+        document.getElementById('titlein').style.display = 'inline';
+        document.getElementById('titleout').style.display = 'none';
+        document.getElementById('scoredisplay').style.display = 'inline';
+        document.getElementById('quitbutton').style.display = 'inline';
+        document.getElementById('startbutton').style.display = 'none';
+      }
+      const canvas = document.getElementById('game');
+      const context = canvas.getContext('2d');
+      var j = 0;
+      var k = 0;
+      // each row is 14 bricks long. the level consists of 6 blank rows then 8 rows
+      // of 4 colors: red, orange, green, and yellow
+      const level1 = [
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        ['R', 'R', 'R', 'R', 'R', 'R', 'R', 'R', 'R', 'R', 'R', 'R', 'R', 'R'],
+        ['R', 'R', 'R', 'R', 'R', 'R', 'R', 'R', 'R', 'R', 'R', 'R', 'R', 'R'],
+        ['O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O'],
+        ['O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O'],
+        ['R', 'R', 'R', 'R', 'R', 'R', 'R', 'R', 'R', 'R', 'R', 'R', 'R', 'R'],
+        ['R', 'R', 'R', 'R', 'R', 'R', 'R', 'R', 'R', 'R', 'R', 'R', 'R', 'R'],
+        ['O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O'],
+        ['O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O']
+      ];
+      // create a mapping between color short code (R, O, G, Y) and color name
+      const R = 'R'
+      const colorMap = {
+        R: 'blue',
+        'O': 'purple',
+      };
+      // use a 2px gap between each brick
+      const brickGap = 2;
+      const brickWidth = 25;
+      const brickHeight = 12;
+      // the wall width takes up the remaining space of the canvas width. with 14 bricks
+      // and 13 2px gaps between them, thats: 400 - (14 * 25 + 2 * 13) = 24px. so each
+      // wall will be 12px
+      const wallSize = 12;
+      const bricks = [];
+      // create the level by looping over each row and column in the level1 array
+      // and creating an object with the bricks position (x, y) and color
+      for (let row = 0; row < level1.length; row++) {
+        for (let col = 0; col < level1[row].length; col++) {
+          const colorCode = level1[row][col];
+          bricks.push({
+            x: wallSize + (brickWidth + brickGap) * col,
+            y: wallSize + (brickHeight + brickGap) * row,
+            color: colorMap[colorCode],
+            width: brickWidth,
+            height: brickHeight
+          });
+        }
+      }
+      const paddle = {
+        // place the paddle horizontally in the middle of the screen
+        x: canvas.width / 2 - brickWidth,
+        y: 440,
+        width: brickWidth * 2,
+        height: brickHeight,
+        // paddle x velocity
+        dx: 0
+      };
+      const ball = {
+        x: 130,
+        y: 260,
+        width: 5,
+        height: 5,
+        // how fast the ball should go in either the x or y direction
+        speed: 5,
+        // ball velocity
+        dx: 0,
+        dy: 0
+      };
+      // check for collision between two objects using axis-aligned bounding box (AABB)
+      // @see https://developer.mozilla.org/en-US/docs/Games/Techniques/2D_collision_detection
+      function collides(obj1, obj2) {
+        return obj1.x < obj2.x + obj2.width && obj1.x + obj1.width > obj2.x && obj1.y < obj2.y + obj2.height && obj1.y + obj1.height > obj2.y;
+      }
+      // game loop
+      function loop() {
+        requestAnimationFrame(loop);
+        context.clearRect(0, 0, canvas.width, canvas.height);
+        // move paddle by it's velocity
+        paddle.x += paddle.dx;
+        // prevent paddle from going through walls
+        if (paddle.x < wallSize) {
+          paddle.x = wallSize
+        } else if (paddle.x + brickWidth * 2 > canvas.width - wallSize) {
+          paddle.x = canvas.width - wallSize - brickWidth * 2;
+        }
+        // move ball by it's velocity
+        ball.x += ball.dx;
+        ball.y += ball.dy;
+        // prevent ball from going through walls by changing its velocity
+        // left & right walls
+        if (ball.x < wallSize) {
+          ball.x = wallSize;
+          ball.dx *= -1;
+        } else if (ball.x + ball.width > canvas.width - wallSize) {
+          ball.x = canvas.width - wallSize - ball.width;
+          ball.dx *= -1;
+        }
+        // top wall
+        if (ball.y < wallSize) {
+          ball.y = wallSize;
+          ball.dy *= -1;
+        }
+        // reset ball if it goes below the screen
+        if (ball.y > canvas.height) {
+          ball.x = 130;
+          ball.y = 260;
+          ball.dx = 0;
+          ball.dy = 0;
+        }
+        // check to see if ball collides with paddle. if they do change y velocity
+        if (collides(ball, paddle)) {
+          ball.dy *= -1;
+          // move ball above the paddle otherwise the collision will happen again
+          // in the next frame
+          ball.y = paddle.y - ball.height;
+        }
+        // check to see if ball collides with a brick. if it does, remove the brick
+        // and change the ball velocity based on the side the brick was hit on
+        for (let i = 0; i < bricks.length; i++) {
+          const brick = bricks[i];
+          if (collides(ball, brick)) {
+            // remove brick from the bricks array
+            bricks.splice(i, 1);
+            j += 10;
+            k += 1;
+            document.getElementById("score").innerHTML = j;
+            if (k = 112) {}
+            // ball is above or below the brick, change y velocity
+            // account for the balls speed since it will be inside the brick when it
+            // collides
+            if (ball.y + ball.height - ball.speed <= brick.y || ball.y >= brick.y + brick.height - ball.speed) {
+              ball.dy *= -1;
+            }
+            // ball is on either side of the brick, change x velocity
+            else {
+              ball.dx *= -1;
+            }
+            break;
+          }
+        }
+        // draw walls
+        context.fillStyle = 'lightgrey';
+        context.fillRect(0, 0, canvas.width, wallSize);
+        context.fillRect(0, 0, wallSize, canvas.height);
+        context.fillRect(canvas.width - wallSize, 0, wallSize, canvas.height);
+        // draw ball if it's moving
+        if (ball.dx || ball.dy) {
+          context.fillRect(ball.x, ball.y, ball.width, ball.height);
+        }
+        // draw bricks
+        bricks.forEach(function(brick) {
+          context.fillStyle = brick.color;
+          context.fillRect(brick.x, brick.y, brick.width, brick.height);
+        });
+        // draw paddle
+        context.fillStyle = 'purple';
+        context.fillRect(paddle.x, paddle.y, paddle.width, paddle.height);
+      }
+      // listen to keyboard events to move the paddle
+      document.addEventListener('keydown', function(e) {
+        // left arrow key
+        if (e.which === 37) {
+          paddle.dx = -12;
+        }
+        // right arrow key
+        else if (e.which === 39) {
+          paddle.dx = 12;
+        }
+        // space key
+        // if they ball is not moving, we can launch the ball using the space key. ball
+        // will move towards the bottom right to start
+        if (ball.dx === 0 && ball.dy === 0 && e.which === 32) {
+          ball.dx = ball.speed;
+          ball.dy = ball.speed;
+          if (j > 49) {
+            j -= 35;
+          } else if (j > 29) {
+            j -= 25
+          } else if (j > 19) {
+            j -= 5
+          } else if (j < 16) {
+            j = 0
+          }
+          document.getElementById("score").innerHTML = j;
+        }
+      });
+      // listen to keyboard events to stop the paddle if key is released
+      document.addEventListener('keyup', function(e) {
+        if (e.which === 37 || e.which === 39) {
+          paddle.dx = 0;
+        }
+      });
+      // start the game
+      requestAnimationFrame(loop);
+    </script>
+  </body>
+</html>
